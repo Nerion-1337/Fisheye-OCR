@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="../css/style.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="../assets/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+      integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+      crossorigin="anonymous"
+      referrerpolicy="noreferrer"
+    />
+    <script defer src="../scripts/photographer.js" type="module"></script>
+    <script src="../scripts/loader.js" type="module"></script>
+    <title>Fisheye - photographe</title>
+  </head>
+  <body>
+    <section class="loader">
+      <p>Chargement</p>
+      <div class="bloc_load">
+        <div class="load"></div>
+        <div class="load"></div>
+        <div class="load"></div>
+      </div>
+    </section>
+    <header>
+      <a href="../index.html" aria-label="retourner à la page d'accueil des photographe"
+        ><img src="../assets/images/logo.png" class="logo"
+      /></a>
+    </header>
+    <main id="main">
+      <div class="photograph-header">
+        <div class="profil">
+          <div class="otherInfo">
+            <div class="totalLike">300</div>
+            <div class="price"></div>
+          </div>
+        </div>
+        <button class="contact_button">Contactez-moi</button>
+      </div>
+      <section>
+        <div class="filter">
+          <p>Trier par</p>
+          <button class="wrapper">
+            <div class="select">
+              <div class="arrow"></div>
+              <a class="selectFilter" href="#" aria-label="Trier par popularité">Popularite</a>
+              <a class="selectFilter" href="#" aria-label="Trier par date">Date</a>
+              <a class="selectFilter" href="#" aria-label="Trier par titre">Titre</a>
+            </div>
+          </button>
+        </div>
+      </section>
+      <section class="picture_section"></section>
+
+      <aside>
+        <div class="boxWindow">
+          <button class="left"></button>
+          <div class="boxPictureTitle">
+            <div class="boxPicture">
+              <img class="boxImg" src="" alt="" />
+              <video class="boxVideo" src="" alt=""></video>
+            </div>
+            <h2 class="boxTitle"></h2>
+          </div>
+          <button class="close">&times;</button>
+          <button class="right"></button>
+        </div>
+      </aside>
+    </main>
+
+    <div id="contact_modal">
+      <div class="modal">
+        <header>
+          <div class="bloc_header">
+            <h2>Contactez-moi</h2>
+            <a class="close_button" href="#"><img src="../assets/icons/close.svg"  /></a>
+          </div>
+          <h2 class="name_header"></h2>
+        </header>
+
+        <form id="form" name="reserve" action="index.html" method="get">
+          <div class="formData first">
+            <label class="text-label" for="first">Prénom</label>
+            <input class="text-control" type="text" id="first" name="first" />
+            <small></small>
+          </div>
+
+          <div class="formData last">
+            <label class="text-label" for="last">Nom</label>
+            <input class="text-control" type="text" id="last" name="last" />
+            <small></small>
+          </div>
+
+          <div class="formData email">
+            <label class="text-label" for="email">E-mail</label>
+            <input class="text-control" type="text" id="email" name="email" />
+            <small></small>
+          </div>
+
+          <div class="formData text">
+            <label class="text-label" for="text">Votre message</label>
+            <input type="text" class="text-control" id="text" name="text" />
+            <small></small>
+          </div>
+
+          <button class="valid_button">Envoyer</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
