@@ -29,7 +29,7 @@
       </div>
     </section>
     <header>
-      <a href="../index.html" aria-label="retourner à la page d'accueil des photographe"
+      <a role="lien" href="../index.html" aria-label="retourner à la page d'accueil des photographe"
         ><img src="../assets/images/logo.png" class="logo" alt="logo Fisheye"
       /></a>
     </header>
@@ -46,12 +46,12 @@
       <section>
         <div class="filter">
           <p>Trier par</p>
-          <button class="wrapper">
+          <button class="wrapper" aria-haspopup="listbox">
             <div class="select">
               <div class="arrow"></div>
-              <a class="selectFilter" href="#" aria-label="Trier par popularité">Popularite</a>
-              <a class="selectFilter" href="#" aria-label="Trier par date">Date</a>
-              <a class="selectFilter" href="#" aria-label="Trier par titre">Titre</a>
+              <a role="button" class="selectFilter" href="#" aria-label="Trier par popularité">Popularite</a>
+              <a role="button" class="selectFilter" href="#" aria-label="Trier par date">Date</a>
+              <a role="button" class="selectFilter" href="#" aria-label="Trier par titre">Titre</a>
             </div>
           </button>
         </div>
@@ -59,8 +59,8 @@
       <section class="picture_section"></section>
 
       <aside>
-        <div class="boxWindow">
-          <button class="left"></button>
+        <div class="boxWindow" role="slider" aria-label="lightbox modal">
+          <button class="left" role="button" aria-label="media précédent"></button>
           <div class="boxPictureTitle">
             <div class="boxPicture">
               <img class="boxImg" src="" alt="" />
@@ -68,43 +68,43 @@
             </div>
             <h2 class="boxTitle"></h2>
           </div>
-          <button class="close">&times;</button>
-          <button class="right"></button>
+          <button class="close" role="button" aria-label="fermer">&times;</button>
+          <button class="right" role="button" aria-label="media suivant"></button>
         </div>
       </aside>
     </main>
 
-    <div id="contact_modal">
+    <div id="contact_modal" aria-label="contact-modal" role="dialog">
       <div class="modal">
         <header>
           <div class="bloc_header">
             <h2>Contactez-moi</h2>
-            <a class="close_button" href="#"><img src="../assets/icons/close.svg"  /></a>
+            <a class="close_button" href="#" role="button" aria-label="fermer"><img src="../assets/icons/close.svg"  /></a>
           </div>
           <h2 class="name_header"></h2>
         </header>
 
         <form id="form" name="reserve" action="index.html" method="get">
           <div class="formData first">
-            <label class="text-label" for="first">Prénom</label>
+            <label class="text-label" for="first" aria-label="Entrez votre prénom">Prénom</label>
             <input class="text-control" type="text" id="first" name="first" />
             <small></small>
           </div>
 
           <div class="formData last">
-            <label class="text-label" for="last">Nom</label>
+            <label class="text-label" for="last" aria-label="Entrez votre nom">Nom</label>
             <input class="text-control" type="text" id="last" name="last" />
             <small></small>
           </div>
 
           <div class="formData email">
-            <label class="text-label" for="email">E-mail</label>
+            <label class="text-label" for="email" aria-label="Entrez votre email">E-mail</label>
             <input class="text-control" type="text" id="email" name="email" />
             <small></small>
           </div>
 
           <div class="formData text">
-            <label class="text-label" for="text">Votre message</label>
+            <label class="text-label" for="text" aria-label="Entrez votre message">Votre message</label>
             <input type="text" class="text-control" id="text" name="text" />
             <small></small>
           </div>

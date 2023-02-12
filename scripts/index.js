@@ -46,6 +46,7 @@ function photographerFactory(photographer) {
     const link = document.createElement("a");
     link.setAttribute("href", linktopage);
     link.setAttribute("aria-label", "acceder au profil du photographe");
+    link.setAttribute("role", "lien");
     const h2 = document.createElement("h2");
     const h3 = document.createElement("h3");
     const taglineP = document.createElement("p");
