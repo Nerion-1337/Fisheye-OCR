@@ -242,12 +242,12 @@ h1 {
   align-items: center;
 }
 
-.photograph-header .profil h2 {
+.photograph-header .profil h1 {
   color: #D3573C;
   font-size: 64px;
 }
 
-.photograph-header .profil h3 {
+.photograph-header .profil h2 {
   color: #901C1C;
   font-size: 24px;
 }

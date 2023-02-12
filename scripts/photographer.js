@@ -60,8 +60,8 @@ function photographerFactory() {
     blocimg.setAttribute("class", "blocimg");
     const link = document.createElement("a");
     link.setAttribute("href", linktopage);
-    const h2 = document.createElement("h2");
-    const h3 = document.createElement("h3");
+    const h2 = document.createElement("h1");
+    const h3 = document.createElement("h2");
     const taglineP = document.createElement("p");
     taglineP.setAttribute("class", "taglineP");
     heart.setAttribute("class", "fa fa-heart");
@@ -121,7 +121,7 @@ function mediaFactory(item, index) {
   article.setAttribute("index", index);
   link.setAttribute("title", title);
   link.setAttribute("href", "#");
-  link.setAttribute("aria-describedy", "ouvre le slider");
+  link.setAttribute("aria-label", "ouvre le slider");
   img.setAttribute("src", picture);
   img.setAttribute("alt", title);
   figure.setAttribute("class", date);
