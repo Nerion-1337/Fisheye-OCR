@@ -1,6 +1,18 @@
-# Base de code du projet P6 - Parcours Front-end
+# Fisheye-OCR
 
-## Démarrer le projet
+Project de formation chez OpenClassRoom.
 
-Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.
+Langage solicité:
 
+- HTML
+- CSS
+- SASS
+_ JAVASCRIPT
+
+# Objectif
+
+- Maitrise site dynamique grâce à des datas (json ici).
+- Site optimiser pour l'accessibilité
+- 
+
+![screenshot du site](./assets/maquette.png)
