@@ -7,7 +7,7 @@ Langage solicité:
 - HTML
 - CSS
 - SASS
-_ JAVASCRIPT
+- JAVASCRIPT
 
 # Objectif
 
