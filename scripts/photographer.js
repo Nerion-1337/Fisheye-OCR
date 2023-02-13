@@ -191,64 +191,62 @@ const spans = document.querySelectorAll(".selectFilter");
 const parent = spans[0].parentNode;
 let firstSpan = spans[0];
 
-//Accessibilité pour clavier
-const wrapper = document.querySelector(".wrapper");
-
-wrapper.addEventListener("keydown", (e) => {
-  if (e.keyCode === 13) {
-    wrapper.classList.toggle("active");
-  }
-});
-
 //Récupère les articles créers
 const articles = document.querySelectorAll("article");
 
 //Permet de transiter le filtre selectionné en premier au click
-spans.forEach((span) => {
-  span.addEventListener("click", () => {
-    if (span !== firstSpan) {
-      parent.removeChild(span);
-      parent.insertBefore(span, firstSpan);
-      firstSpan = span;
-    }
+// spans.forEach((span) => {
+//   span.addEventListener("click", () => {
+//     if (span !== firstSpan) {
+//       parent.removeChild(span);
+//       parent.insertBefore(span, firstSpan);
+//       firstSpan = span;
+//       spans.forEach((span) => {
+//         if (span === firstSpan) {
+//           span.setAttribute("aria-selected", "true");
+//         } else {
+//           span.setAttribute("aria-selected", "false");
+//         }
+//       });
+//     }
 
-    //Va permettre de réorganiser les articles en fonction du filtre selectionné plus haut
-    let sortedArticles = Array.from(articles)
-      .map((item, index) => {
-        return { item, index };
-      })
-      .sort((a, b) => {
-        if (span.innerHTML === "Popularite") {
-          let aLikes = parseInt(a.item.querySelector(".like").textContent);
-          let bLikes = parseInt(b.item.querySelector(".like").textContent);
-          return bLikes - aLikes;
-        } else if (span.innerHTML === "Date") {
-          let aDate = a.item.querySelector("figure").className;
-          let bDate = b.item.querySelector("figure").className;
-          if (aDate < bDate) {
-            return 1;
-          } else if (aDate > bDate) {
-            return -1;
-          } else {
-            return 0;
-          }
-        } else if (span.innerHTML === "Titre") {
-          let aTitle = a.item.querySelector(".title").textContent;
-          let bTitle = b.item.querySelector(".title").textContent;
-          return aTitle.localeCompare(bTitle);
-        }
-      });
+//     //Va permettre de réorganiser les articles en fonction du filtre selectionné plus haut
+//     let sortedArticles = Array.from(articles)
+//       .map((item, index) => {
+//         return { item, index };
+//       })
+//       .sort((a, b) => {
+//         if (span.innerHTML === "Popularite") {
+//           let aLikes = parseInt(a.item.querySelector(".like").textContent);
+//           let bLikes = parseInt(b.item.querySelector(".like").textContent);
+//           return bLikes - aLikes;
+//         } else if (span.innerHTML === "Date") {
+//           let aDate = a.item.querySelector("figure").className;
+//           let bDate = b.item.querySelector("figure").className;
+//           if (aDate < bDate) {
+//             return 1;
+//           } else if (aDate > bDate) {
+//             return -1;
+//           } else {
+//             return 0;
+//           }
+//         } else if (span.innerHTML === "Titre") {
+//           let aTitle = a.item.querySelector(".title").textContent;
+//           let bTitle = b.item.querySelector(".title").textContent;
+//           return aTitle.localeCompare(bTitle);
+//         }
+//       });
 
-    articles.forEach((article) => {
-      article.remove();
-    });
+//     articles.forEach((article) => {
+//       article.remove();
+//     });
 
-    sortedArticles.forEach((article, index) => {
-      article.item.setAttribute("index", index);
-      document.querySelector(".picture_section").appendChild(article.item);
-    });
-  });
-});
+//     sortedArticles.forEach((article, index) => {
+//       article.item.setAttribute("index", index);
+//       document.querySelector(".picture_section").appendChild(article.item);
+//     });
+//   });
+// });
 
 //fenêtre picture
 const aside = document.querySelector("aside");
@@ -324,7 +322,7 @@ articles.forEach((article) => {
       }
     });
 
-    //au click de left l'affiche dans la fênetre l'img/video suivante droite
+    //au click de right l'affiche dans la fênetre l'img/video suivante droite
     right.addEventListener("click", () => {
       const newArticle = document.querySelectorAll("article");
       currentArticle++;
@@ -500,3 +498,42 @@ function validtext() {
     return true;
   }
 }
+
+//Accessibilité pour clavier
+const wrapper = document.querySelector(".wrapper");
+const select = document.querySelector(".select");
+
+wrapper.addEventListener("keydown", (e) => {
+  if (e.keyCode === 13) {
+    wrapper.classList.toggle("active");
+    if (wrapper.classList.contains("active")) {
+      wrapper.setAttribute("aria-expanded", "true");
+    } else {
+      wrapper.setAttribute("aria-expanded", "false");
+    }
+  }
+});
+
+wrapper.addEventListener("blur", () => {
+  wrapper.classList.remove("active");
+  wrapper.setAttribute("aria-expanded", "false");
+});
+
+spans.forEach((span) =>{
+span.addEventListener("focusin", (e) => {
+  if (e.target.classList.contains("selectFilter")) {
+    wrapper.classList.add("active");
+    wrapper.setAttribute("aria-expanded", "true");
+  }
+});
+span.addEventListener("blur", () => {
+  wrapper.classList.remove("active");
+  wrapper.setAttribute("aria-expanded", "false");
+});
+});
+
+
+document.addEventListener("click", () => {
+  const activeElement = document.activeElement;
+  console.log(activeElement);
+});

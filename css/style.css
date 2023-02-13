@@ -451,7 +451,7 @@ section .filter .select {
 
 section .filter .wrapper:hover,
 section .filter .wrapper.active {
-  height: 180px;
+  height: 183px;
 }
 section .filter .wrapper:hover .arrow,
 section .filter .wrapper.active .arrow {
