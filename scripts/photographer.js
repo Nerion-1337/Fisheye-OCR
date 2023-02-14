@@ -186,13 +186,13 @@ function videoFactory(item, index) {
   return article;
 }
 
+//Récupère les articles créers
+const articles = document.querySelectorAll("article");
+
 //Permet de transiter le filtre selectionné en premier
 const spans = document.querySelectorAll(".selectFilter");
 const parent = spans[0].parentNode;
 let firstSpan = spans[0];
-
-//Récupère les articles créers
-const articles = document.querySelectorAll("article");
 
 //Permet de transiter le filtre selectionné en premier au click
 spans.forEach((span) => {
@@ -286,14 +286,12 @@ articles.forEach((article) => {
       boxImg.style.display = "none";
       boxVideo.style.display = "block";
       boxVideo.src = article.querySelector("video").getAttribute("src");
-      boxVideo.alt = article.querySelector("video").getAttribute("alt");
       boxVideo.setAttribute(
         "alt",
         article.querySelector("video").getAttribute("alt")
       );
       boxVideo.setAttribute("autoplay", "");
       boxVideo.setAttribute("loop", "");
-      console.log(boxVideo.alt);
     }
 
     //au click de left l'affiche dans la fênetre l'img/video suivante gauche
