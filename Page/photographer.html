@@ -41,7 +41,7 @@
             <div class="price"></div>
           </div>
         </div>
-        <button class="contact_button">Contactez-moi</button>
+        <button class="contact_button" aria-pressed="false">Contactez-moi</button>
       </div>
       <section>
         <div class="filter">
@@ -58,8 +58,8 @@
       </section>
       <section class="picture_section"></section>
 
-      <aside>
-        <div class="boxWindow" role="slider" aria-label="lightbox modal">
+      <aside role="slider" aria-label="lightbox modal" aria-hidden="true">
+        <div class="boxWindow" >
           <button class="left" role="button" aria-label="media précédent"></button>
           <div class="boxPictureTitle">
             <div class="boxPicture">
@@ -74,7 +74,7 @@
       </aside>
     </main>
 
-    <div id="contact_modal" aria-label="contact-modal" role="dialog">
+    <div id="contact_modal" aria-label="contact-modal" role="dialog" aria-hidden="true">
       <div class="modal">
         <header>
           <div class="bloc_header">
@@ -84,7 +84,7 @@
           <h2 class="name_header"></h2>
         </header>
 
-        <form id="form" name="reserve" action="index.html" method="get">
+        <form id="form" name="reserve" action="index.html" method="get" role="document">
           <div class="formData first">
             <label class="text-label" for="first" aria-label="Entrez votre prénom">Prénom</label>
             <input class="text-control" type="text" id="first" name="first" />

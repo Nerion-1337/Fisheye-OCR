@@ -263,6 +263,7 @@ close.addEventListener("click", () => {
   aside.style.transform = "scale(0)";
   boxVideo.style.display = "none";
   boxImg.style.display = "none";
+  aside.setAttribute("aria-hidden", "true");
 });
 
 //au click sur l'article l'affiche dans la fênetre
@@ -272,6 +273,7 @@ articles.forEach((article) => {
     const fig = article.querySelector("figure");
     const child = fig.firstElementChild;
 
+    aside.setAttribute("aria-hidden", "false");
     aside.style.transform = "scale(1)";
     titre.innerHTML = article.querySelector(".title").textContent;
 
@@ -360,10 +362,16 @@ const close_button = document.querySelector(".close_button");
 
 contact_button.addEventListener("click", () => {
   modal.style.display = "block";
+  modal.setAttribute("aria-hidden", "false");
+  contact_button.setAttribute("aria-pressed", "true");
+  close_button.setAttribute("aria-pressed", "false");
 });
 
 close_button.addEventListener("click", () => {
   modal.style.display = "none";
+  modal.setAttribute("aria-hidden", "true");
+  contact_button.setAttribute("aria-pressed", "false");
+  close_button.setAttribute("aria-pressed", "true");
 });
 
 //Condition Formulaire
@@ -519,19 +527,18 @@ wrapper.addEventListener("blur", () => {
   wrapper.setAttribute("aria-expanded", "false");
 });
 
-spans.forEach((span) =>{
-span.addEventListener("focusin", (e) => {
-  if (e.target.classList.contains("selectFilter")) {
-    wrapper.classList.add("active");
-    wrapper.setAttribute("aria-expanded", "true");
-  }
+spans.forEach((span) => {
+  span.addEventListener("focusin", (e) => {
+    if (e.target.classList.contains("selectFilter")) {
+      wrapper.classList.add("active");
+      wrapper.setAttribute("aria-expanded", "true");
+    }
+  });
+  span.addEventListener("blur", () => {
+    wrapper.classList.remove("active");
+    wrapper.setAttribute("aria-expanded", "false");
+  });
 });
-span.addEventListener("blur", () => {
-  wrapper.classList.remove("active");
-  wrapper.setAttribute("aria-expanded", "false");
-});
-});
-
 
 document.addEventListener("click", () => {
   const activeElement = document.activeElement;
