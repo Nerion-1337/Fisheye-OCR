@@ -76,20 +76,14 @@ const pictureSection = document.querySelector(".picture_section");
 
 //Regex pour verifier le type de media
 const imageRegex = /\.(jpeg|jpg|gif|png)$/;
-const videoRegex = /\.(mp4)$/;
 
 sortedData.forEach((item) => {
-  if (imageRegex.test(item.image)) {
     pictureSection.appendChild(mediaFactory(item));
-  } else {
-    pictureSection.appendChild(videoFactory(item));
-  }
 });
 
 function mediaFactory(item) {
-  const { title, image, likes, date } = item;
-  const picture = `../assets/images/${idUser}/${image}`;
-
+  const { title, image, video, likes, date } = item;
+  
   const article = document.createElement("article");
   const link = document.createElement("a");
   const figure = document.createElement("figure");
@@ -116,53 +110,26 @@ function mediaFactory(item) {
 
   article.appendChild(link);
   link.appendChild(figure);
-  figure.appendChild(img);
   article.appendChild(figcaption);
   figcaption.appendChild(text);
   figcaption.appendChild(like);
   like.appendChild(numbheart);
   like.appendChild(heart);
 
-  return article;
-}
+  if(imageRegex.test(image)){
+    const picture = `../assets/images/${idUser}/${image}`;
+    img.setAttribute("src", picture);
+  img.setAttribute("alt", title);
+  figure.appendChild(img);
 
-function videoFactory(item) {
-  const { title, likes, video, date } = item;
-  const moovie = `../assets/images/${idUser}/${video}`;
-
-  const article = document.createElement("article");
-  const link = document.createElement("a");
-  const figure = document.createElement("figure");
+  } else{
+ const moovie = `../assets/images/${idUser}/${video}`;
   const videos = document.createElement("video");
-  const figcaption = document.createElement("div");
-  const text = document.createElement("p");
-  const like = document.createElement("div");
-  const numbheart = document.createElement("p");
-  const heart = document.createElement("i");
-
-  link.setAttribute("title", title);
-  link.setAttribute("href", "#");
-  link.setAttribute("aria-describedy", "ouvre le slider");
   videos.setAttribute("src", moovie);
   videos.setAttribute("alt", title);
   figure.setAttribute("class", date);
-  figcaption.setAttribute("class", "figcaption");
-  text.setAttribute("class", "title");
-  text.textContent = title;
-  like.setAttribute("class", "like");
-  numbheart.setAttribute("class", "heart");
-  numbheart.textContent = likes;
-  heart.setAttribute("class", "fa fa-heart");
-
-  article.appendChild(link);
-  link.appendChild(figure);
   figure.appendChild(videos);
-  article.appendChild(figcaption);
-  figcaption.appendChild(text);
-  figcaption.appendChild(like);
-  like.appendChild(numbheart);
-  like.appendChild(heart);
-
+  }
   return article;
 }
 
