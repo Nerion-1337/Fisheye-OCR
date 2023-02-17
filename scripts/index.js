@@ -1,41 +1,25 @@
-async function getPhotographers() {
-  let photographers;
-
-  await fetch("./data/photographers.json")
+  //récupération des données filtré de photographe
+  let photographers =  await fetch("./data/photographers.json")
     .then((r) => r.json())
     .then((data) => {
-      photographers = data.photographers;
+      return data.photographers;
     })
     .catch((error) => console.error(error));
 
-  return { photographers };
-}
-
-async function displayData(photographers) {
   const photographersSection = document.querySelector(".photographer_section");
 
+  //boucle pour afficher chaque photographe
   photographers.forEach((photographer) => {
-    const photographerModel = photographerFactory(photographer);
-    const userCardDOM = photographerModel.getUserCardDOM();
-    photographersSection.appendChild(userCardDOM);
+    photographersSection.appendChild(getUserCardDOM(photographer));
   });
-}
+  
+    //fonction qui structure la page et affiche chaque photographe
+  function getUserCardDOM(photographer) {
 
-async function init() {
-  // Récupère les datas des photographes
-  const { photographers } = await getPhotographers();
-  displayData(photographers);
-}
-
-init();
-
-function photographerFactory(photographer) {
   const { id, name, portrait, city, country, tagline, price } = photographer;
-
   const picture = `assets/photographers/${portrait}`;
   const linktopage = "./Page/photographer.html?id=" + id;
 
-  function getUserCardDOM() {
     const article = document.createElement("article");
     const img = document.createElement("img");
     img.setAttribute("src", picture);
@@ -68,5 +52,3 @@ function photographerFactory(photographer) {
 
     return article;
   }
-  return { name, picture, getUserCardDOM };
-}

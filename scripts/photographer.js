@@ -1,110 +1,92 @@
-async function getMedia() {
-  let fulldata;
-
-  await fetch("../data/photographers.json")
-    .then((r) => r.json())
-    .then((data) => {
-      fulldata = data;
-    })
-    .catch((error) => console.error(error));
-
-  return { fulldata };
-}
-
-//récupère les data des deux tableau du json
-const { fulldata } = await getMedia();
-const dataPhotographer = fulldata.photographers;
-const dataMedia = fulldata.media;
-
 //Récupère id inséré dans l'url
 const url = window.location.href;
 const idUser = new URL(url).searchParams.get("id");
 
-//Recherche dans les data p/r à l'id
-const photographer = dataPhotographer.filter((item) => {
-  return item.id == idUser;
-});
+//récupère les data trié
+let fulldata = await fetch(`../data/photographers.json`)
+  .then((r) => r.json())
+  .then((data) => {
+    //Recherche dans les data photographers p/r à l'id
+    let photographers = data.photographers.filter((p) => p.id == idUser);
+    //Récupère les photos en fonction de l'id du photogrpahe
+    let media = data.media.filter((p) => p.photographerId == idUser);
+    //retourne 2 tableaux
+    return { photographers, media };
+  })
+  .catch((error) => console.error(error));
 
-//Récupère les photos en fonction de l'id
-const media = dataMedia.filter((item) => {
-  return item.photographerId == idUser;
-});
-
-const name = photographer[0].name;
-const imageRegex = /\.(jpeg|jpg|gif|png)$/;
-const videoRegex = /\.(mp4)$/;
 
 //Récupérer est utiliser les données photographe
 const photograph_header = document.querySelector(".photograph-header");
 const name_header = document.querySelector(".name_header");
-const photographerModel = photographerFactory();
-const userCardDOM = photographerModel.getUserCardDOM();
+const { id, name, portrait, city, country, tagline, price } =
+  fulldata.photographers[0];
 
-function photographerFactory() {
-  const { id, name, portrait, city, country, tagline, price } = photographer[0];
+const picture = `../assets/photographers/${portrait}`;
+const linktopage = "./photographer.html?id=" + id;
+const profil = document.querySelector(".profil");
+const priceP = document.querySelector(".price");
+const totalLike = document.querySelector(".totalLike");
+const totalLikes = fulldata.media.reduce(
+  (acc, current) => acc + current.likes,
+  0
+);
+const heart = document.createElement("i");
 
-  const picture = `../assets/photographers/${portrait}`;
-  const linktopage = "./photographer.html?id=" + id;
-  const profil = document.querySelector(".profil");
-  const priceP = document.querySelector(".price");
-  const totalLike = document.querySelector(".totalLike");
-  const totalLikes = media.reduce((acc, current) => acc + current.likes, 0);
-  const heart = document.createElement("i");
+function getUserCardDOM() {
+  const img = document.createElement("img");
+  img.setAttribute("src", picture);
+  img.setAttribute("alt", name);
+  img.setAttribute("class", "p" + id);
+  const blocimg = document.createElement("div");
+  blocimg.setAttribute("class", "blocimg");
+  const link = document.createElement("a");
+  link.setAttribute("href", linktopage);
+  const h2 = document.createElement("h1");
+  const h3 = document.createElement("h2");
+  const taglineP = document.createElement("p");
+  taglineP.setAttribute("class", "taglineP");
+  heart.setAttribute("class", "fa fa-heart");
 
-  function getUserCardDOM() {
-    const img = document.createElement("img");
-    img.setAttribute("src", picture);
-    img.setAttribute("alt", name);
-    img.setAttribute("class", "p" + id);
-    const blocimg = document.createElement("div");
-    blocimg.setAttribute("class", "blocimg");
-    const link = document.createElement("a");
-    link.setAttribute("href", linktopage);
-    const h2 = document.createElement("h1");
-    const h3 = document.createElement("h2");
-    const taglineP = document.createElement("p");
-    taglineP.setAttribute("class", "taglineP");
-    heart.setAttribute("class", "fa fa-heart");
+  name_header.textContent = name;
+  h2.textContent = name;
+  h3.textContent = city + ", " + country;
+  taglineP.textContent = tagline;
+  priceP.textContent = price + "€ / jour";
+  totalLike.textContent = totalLikes;
+  photograph_header.appendChild(blocimg);
+  blocimg.appendChild(img);
+  profil.appendChild(h2);
+  profil.appendChild(h3);
+  profil.appendChild(taglineP);
+  totalLike.appendChild(heart);
 
-    name_header.textContent = name;
-    h2.textContent = name;
-    h3.textContent = city + ", " + country;
-    taglineP.textContent = tagline;
-    priceP.textContent = price + "€ / jour";
-    totalLike.textContent = totalLikes;
-    photograph_header.appendChild(blocimg);
-    blocimg.appendChild(img);
-    profil.appendChild(h2);
-    profil.appendChild(h3);
-    profil.appendChild(taglineP);
-    totalLike.appendChild(heart);
-
-    return;
-  }
-  return { name, picture, getUserCardDOM };
+  return;
 }
 
+getUserCardDOM();
+
 //Pour trier le tableau par popularité d'office
-let sortedData = media.sort(function (a, b) {
+let sortedData = fulldata.media.sort(function (a, b) {
   return b["likes"] - a["likes"];
 });
 
 //Récupérer et afficher les photos/videos du photographe
-async function displayDataMedia(media) {
-  const pictureSection = document.querySelector(".picture_section");
+const pictureSection = document.querySelector(".picture_section");
 
-  media.forEach((item, index) => {
-    if (imageRegex.test(item.image)) {
-      pictureSection.appendChild(mediaFactory(item, index));
-    } else {
-      pictureSection.appendChild(videoFactory(item, index));
-    }
-  });
-}
+//Regex pour verifier le type de media
+const imageRegex = /\.(jpeg|jpg|gif|png)$/;
+const videoRegex = /\.(mp4)$/;
 
-displayDataMedia(sortedData);
+sortedData.forEach((item) => {
+  if (imageRegex.test(item.image)) {
+    pictureSection.appendChild(mediaFactory(item));
+  } else {
+    pictureSection.appendChild(videoFactory(item));
+  }
+});
 
-function mediaFactory(item, index) {
+function mediaFactory(item) {
   const { title, image, likes, date } = item;
   const picture = `../assets/images/${idUser}/${image}`;
 
@@ -118,7 +100,6 @@ function mediaFactory(item, index) {
   const numbheart = document.createElement("p");
   const heart = document.createElement("i");
 
-  article.setAttribute("index", index);
   link.setAttribute("title", title);
   link.setAttribute("href", "#");
   link.setAttribute("aria-label", "ouvre le slider");
@@ -145,7 +126,7 @@ function mediaFactory(item, index) {
   return article;
 }
 
-function videoFactory(item, index) {
+function videoFactory(item) {
   const { title, likes, video, date } = item;
   const moovie = `../assets/images/${idUser}/${video}`;
 
@@ -159,7 +140,6 @@ function videoFactory(item, index) {
   const numbheart = document.createElement("p");
   const heart = document.createElement("i");
 
-  article.setAttribute("index", index);
   link.setAttribute("title", title);
   link.setAttribute("href", "#");
   link.setAttribute("aria-describedy", "ouvre le slider");
@@ -212,8 +192,8 @@ spans.forEach((span) => {
 
     //Va permettre de réorganiser les articles en fonction du filtre selectionné plus haut
     let sortedArticles = Array.from(articles)
-      .map((item, index) => {
-        return { item, index };
+      .map((item) => {
+        return { item };
       })
       .sort((a, b) => {
         if (span.innerHTML === "Popularite") {
@@ -241,10 +221,10 @@ spans.forEach((span) => {
       article.remove();
     });
 
-    sortedArticles.forEach((article, index) => {
-      article.item.setAttribute("index", index);
+    sortedArticles.forEach((article) => {
       document.querySelector(".picture_section").appendChild(article.item);
     });
+    maj();
   });
 });
 
@@ -266,90 +246,94 @@ close.addEventListener("click", () => {
   aside.setAttribute("aria-hidden", "true");
 });
 
-//au click sur l'article l'affiche dans la fênetre
-articles.forEach((article) => {
-  article.addEventListener("click", () => {
-    let currentArticle = article.getAttribute("index");
-    const fig = article.querySelector("figure");
-    const child = fig.firstElementChild;
+function maj() {
+  let newArticle = document.querySelectorAll("article");
+  //au click sur l'article l'affiche dans la fênetre
+  newArticle.forEach((article, index) => {
+    article.addEventListener("click", () => {
+      let currentArticle = index;
+      const fig = article.querySelector("figure");
+      const child = fig.firstElementChild;
 
-    aside.setAttribute("aria-hidden", "false");
-    aside.style.transform = "scale(1)";
-    titre.innerHTML = article.querySelector(".title").textContent;
+      aside.setAttribute("aria-hidden", "false");
+      aside.style.transform = "scale(1)";
+      titre.innerHTML = article.querySelector(".title").textContent;
 
-    if (child.nodeName === "IMG") {
-      boxVideo.style.display = "none";
-      boxImg.style.display = "block";
-      boxImg.src = article.querySelector("img").getAttribute("src");
-      boxImg.alt = article.querySelector("img").getAttribute("alt");
-    } else if (child.nodeName === "VIDEO") {
-      boxImg.style.display = "none";
-      boxVideo.style.display = "block";
-      boxVideo.src = article.querySelector("video").getAttribute("src");
-      boxVideo.setAttribute(
-        "alt",
-        article.querySelector("video").getAttribute("alt")
-      );
-      boxVideo.setAttribute("autoplay", "");
-      boxVideo.setAttribute("loop", "");
-    }
-
-    //au click de left l'affiche dans la fênetre l'img/video suivante gauche
-    left.addEventListener("click", () => {
-      const newArticle = document.querySelectorAll("article");
-      currentArticle--;
-      if (currentArticle < 0) {
-        currentArticle = newArticle.length - 1;
-      }
-      const articleMoins = newArticle[currentArticle];
-      const figure = articleMoins.querySelector("figure");
-      const element = figure.firstElementChild;
-      titre.innerHTML = articleMoins.querySelector(".title").textContent;
-
-      if (element.nodeName === "IMG") {
+      if (child.nodeName === "IMG") {
         boxVideo.style.display = "none";
         boxImg.style.display = "block";
-        boxImg.src = element.getAttribute("src");
-        boxImg.alt = element.getAttribute("alt");
-      } else if (element.nodeName === "VIDEO") {
+        boxImg.src = article.querySelector("img").getAttribute("src");
+        boxImg.alt = article.querySelector("img").getAttribute("alt");
+      } else if (child.nodeName === "VIDEO") {
         boxImg.style.display = "none";
         boxVideo.style.display = "block";
-        boxVideo.src = element.getAttribute("src");
-        boxVideo.setAttribute("alt", element.getAttribute("alt"));
-        boxVideo.setAttribute("autoplay", "");
-        boxVideo.setAttribute("loop", "");
-        console.log(boxVideo.alt);
-      }
-    });
-
-    //au click de right l'affiche dans la fênetre l'img/video suivante droite
-    right.addEventListener("click", () => {
-      const newArticle = document.querySelectorAll("article");
-      currentArticle++;
-      if (currentArticle >= newArticle.length) {
-        currentArticle = 0;
-      }
-      const articlePlus = newArticle[currentArticle];
-      const figure = articlePlus.querySelector("figure");
-      const element = figure.firstElementChild;
-      titre.innerHTML = articlePlus.querySelector(".title").textContent;
-
-      if (element.nodeName === "IMG") {
-        boxVideo.style.display = "none";
-        boxImg.style.display = "block";
-        boxImg.src = element.getAttribute("src");
-        boxImg.alt = element.getAttribute("alt");
-      } else if (element.nodeName === "VIDEO") {
-        boxImg.style.display = "none";
-        boxVideo.style.display = "block";
-        boxVideo.src = element.getAttribute("src");
-        boxVideo.setAttribute("alt", element.getAttribute("alt"));
+        boxVideo.src = article.querySelector("video").getAttribute("src");
+        boxVideo.setAttribute(
+          "alt",
+          article.querySelector("video").getAttribute("alt")
+        );
         boxVideo.setAttribute("autoplay", "");
         boxVideo.setAttribute("loop", "");
       }
+
+      //au click de left l'affiche dans la fênetre l'img/video suivante gauche
+      left.addEventListener("click", () => {
+        const newArticle = document.querySelectorAll("article");
+        currentArticle--;
+        if (currentArticle < 0) {
+          currentArticle = newArticle.length - 1;
+        }
+        const articleMoins = newArticle[currentArticle];
+        const figure = articleMoins.querySelector("figure");
+        const element = figure.firstElementChild;
+        titre.innerHTML = articleMoins.querySelector(".title").textContent;
+
+        if (element.nodeName === "IMG") {
+          boxVideo.style.display = "none";
+          boxImg.style.display = "block";
+          boxImg.src = element.getAttribute("src");
+          boxImg.alt = element.getAttribute("alt");
+        } else if (element.nodeName === "VIDEO") {
+          boxImg.style.display = "none";
+          boxVideo.style.display = "block";
+          boxVideo.src = element.getAttribute("src");
+          boxVideo.setAttribute("alt", element.getAttribute("alt"));
+          boxVideo.setAttribute("autoplay", "");
+          boxVideo.setAttribute("loop", "");
+        }
+      });
+
+      //au click de right l'affiche dans la fênetre l'img/video suivante droite
+      right.addEventListener("click", () => {
+        const newArticle = document.querySelectorAll("article");
+        currentArticle++;
+        if (currentArticle >= newArticle.length) {
+          currentArticle = 0;
+        }
+        const articlePlus = newArticle[currentArticle];
+        const figure = articlePlus.querySelector("figure");
+        const element = figure.firstElementChild;
+        titre.innerHTML = articlePlus.querySelector(".title").textContent;
+
+        if (element.nodeName === "IMG") {
+          boxVideo.style.display = "none";
+          boxImg.style.display = "block";
+          boxImg.src = element.getAttribute("src");
+          boxImg.alt = element.getAttribute("alt");
+        } else if (element.nodeName === "VIDEO") {
+          boxImg.style.display = "none";
+          boxVideo.style.display = "block";
+          boxVideo.src = element.getAttribute("src");
+          boxVideo.setAttribute("alt", element.getAttribute("alt"));
+          boxVideo.setAttribute("autoplay", "");
+          boxVideo.setAttribute("loop", "");
+        }
+      });
     });
   });
-});
+}
+
+maj();
 
 // Formulaire Contact
 
@@ -538,7 +522,7 @@ spans.forEach((span) => {
   });
 });
 
-document.addEventListener("click", () => {
-  const activeElement = document.activeElement;
-  console.log(activeElement);
-});
+// document.addEventListener("click", () => {
+//   const activeElement = document.activeElement;
+//   console.log(activeElement);
+// });
