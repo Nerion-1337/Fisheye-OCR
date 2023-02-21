@@ -488,8 +488,3 @@ spans.forEach((span) => {
     wrapper.setAttribute("aria-expanded", "false");
   });
 });
-
-// document.addEventListener("click", () => {
-//   const activeElement = document.activeElement;
-//   console.log(activeElement);
-// });
