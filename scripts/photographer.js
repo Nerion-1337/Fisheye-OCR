@@ -1,9 +1,11 @@
+import * as loader from "./loader.js";
+
 //Récupère id inséré dans l'url
 const url = window.location.href;
 const idUser = new URL(url).searchParams.get("id");
 
 //récupère les data trié
-let fulldata = await fetch(`../data/photographers.json`)
+let fulldata = fetch(`../data/photographers.json`)
   .then((r) => r.json())
   .then((data) => {
     //Recherche dans les data photographers p/r à l'id
@@ -14,7 +16,6 @@ let fulldata = await fetch(`../data/photographers.json`)
     return { photographers, media };
   })
   .catch((error) => console.error(error));
-
 
 //Récupérer est utiliser les données photographe
 const photograph_header = document.querySelector(".photograph-header");
@@ -78,12 +79,12 @@ const pictureSection = document.querySelector(".picture_section");
 const imageRegex = /\.(jpeg|jpg|gif|png)$/;
 
 sortedData.forEach((item) => {
-    pictureSection.appendChild(mediaFactory(item));
+  pictureSection.appendChild(mediaFactory(item));
 });
 
 function mediaFactory(item) {
   const { title, image, video, likes, date } = item;
-  
+
   const article = document.createElement("article");
   const link = document.createElement("a");
   const figure = document.createElement("figure");
@@ -116,19 +117,18 @@ function mediaFactory(item) {
   like.appendChild(numbheart);
   like.appendChild(heart);
 
-  if(imageRegex.test(image)){
+  if (imageRegex.test(image)) {
     const picture = `../assets/images/${idUser}/${image}`;
     img.setAttribute("src", picture);
-  img.setAttribute("alt", title);
-  figure.appendChild(img);
-
-  } else{
- const moovie = `../assets/images/${idUser}/${video}`;
-  const videos = document.createElement("video");
-  videos.setAttribute("src", moovie);
-  videos.setAttribute("alt", title);
-  figure.setAttribute("class", date);
-  figure.appendChild(videos);
+    img.setAttribute("alt", title);
+    figure.appendChild(img);
+  } else {
+    const moovie = `../assets/images/${idUser}/${video}`;
+    const videos = document.createElement("video");
+    videos.setAttribute("src", moovie);
+    videos.setAttribute("alt", title);
+    figure.setAttribute("class", date);
+    figure.appendChild(videos);
   }
   return article;
 }

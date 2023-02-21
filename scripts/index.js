@@ -1,3 +1,5 @@
+import * as loader from "./loader.js";
+  
   //récupération des données filtré de photographe
   let photographers =  await fetch("./data/photographers.json")
     .then((r) => r.json())
