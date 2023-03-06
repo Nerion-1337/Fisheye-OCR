@@ -5,17 +5,21 @@ const url = window.location.href;
 const idUser = new URL(url).searchParams.get("id");
 
 //récupère les data trié
-let fulldata = fetch(`../data/photographers.json`)
-  .then((r) => r.json())
-  .then((data) => {
-    //Recherche dans les data photographers p/r à l'id
-    let photographers = data.photographers.filter((p) => p.id == idUser);
-    //Récupère les photos en fonction de l'id du photogrpahe
-    let media = data.media.filter((p) => p.photographerId == idUser);
-    //retourne 2 tableaux
+async function fetchData(idUser) {
+  try {
+    const response = await fetch(`../data/photographers.json`);
+    const data = await response.json();
+
+    const photographers = data.photographers.filter((p) => p.id == idUser);
+    const media = data.media.filter((p) => p.photographerId == idUser);
+
     return { photographers, media };
-  })
-  .catch((error) => console.error(error));
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+let fulldata = await fetchData(idUser);
 
 //Récupérer est utiliser les données photographe
 const photograph_header = document.querySelector(".photograph-header");
@@ -78,60 +82,67 @@ const pictureSection = document.querySelector(".picture_section");
 //Regex pour verifier le type de media
 const imageRegex = /\.(jpeg|jpg|gif|png)$/;
 
-sortedData.forEach((item) => {
-  pictureSection.appendChild(mediaFactory(item));
-});
+class Factory_Pattern {
+  constructor(item) {
+    this.item = item;
+  }
 
-function mediaFactory(item) {
-  const { title, image, video, likes, date } = item;
+  mediaFactory() {
+    const { title, image, video, likes, date } = this.item;
 
-  const article = document.createElement("article");
-  const link = document.createElement("a");
-  const figure = document.createElement("figure");
-  const img = document.createElement("img");
-  const figcaption = document.createElement("div");
-  const text = document.createElement("p");
-  const like = document.createElement("div");
-  const numbheart = document.createElement("p");
-  const heart = document.createElement("i");
+    const article = document.createElement("article");
+    const link = document.createElement("a");
+    const figure = document.createElement("figure");
+    const img = document.createElement("img");
+    const figcaption = document.createElement("div");
+    const text = document.createElement("p");
+    const like = document.createElement("div");
+    const numbheart = document.createElement("p");
+    const heart = document.createElement("i");
 
-  link.setAttribute("title", title);
-  link.setAttribute("href", "#");
-  link.setAttribute("aria-label", "ouvre le slider");
-  img.setAttribute("src", picture);
-  img.setAttribute("alt", title);
-  figure.setAttribute("class", date);
-  figcaption.setAttribute("class", "figcaption");
-  text.setAttribute("class", "title");
-  text.textContent = title;
-  like.setAttribute("class", "like");
-  numbheart.setAttribute("class", "heart");
-  numbheart.textContent = likes;
-  heart.setAttribute("class", "fa fa-heart");
-
-  article.appendChild(link);
-  link.appendChild(figure);
-  article.appendChild(figcaption);
-  figcaption.appendChild(text);
-  figcaption.appendChild(like);
-  like.appendChild(numbheart);
-  like.appendChild(heart);
-
-  if (imageRegex.test(image)) {
-    const picture = `../assets/images/${idUser}/${image}`;
+    link.setAttribute("title", title);
+    link.setAttribute("href", "#");
+    link.setAttribute("aria-label", "ouvre le slider");
     img.setAttribute("src", picture);
     img.setAttribute("alt", title);
-    figure.appendChild(img);
-  } else {
-    const moovie = `../assets/images/${idUser}/${video}`;
-    const videos = document.createElement("video");
-    videos.setAttribute("src", moovie);
-    videos.setAttribute("alt", title);
     figure.setAttribute("class", date);
-    figure.appendChild(videos);
+    figcaption.setAttribute("class", "figcaption");
+    text.setAttribute("class", "title");
+    text.textContent = title;
+    like.setAttribute("class", "like");
+    numbheart.setAttribute("class", "heart");
+    numbheart.textContent = likes;
+    heart.setAttribute("class", "fa fa-heart");
+
+    article.appendChild(link);
+    link.appendChild(figure);
+    article.appendChild(figcaption);
+    figcaption.appendChild(text);
+    figcaption.appendChild(like);
+    like.appendChild(numbheart);
+    like.appendChild(heart);
+
+    if (imageRegex.test(image)) {
+      const picture = `../assets/images/${idUser}/${image}`;
+      img.setAttribute("src", picture);
+      img.setAttribute("alt", title);
+      figure.appendChild(img);
+    } else {
+      const moovie = `../assets/images/${idUser}/${video}`;
+      const videos = document.createElement("video");
+      videos.setAttribute("src", moovie);
+      videos.setAttribute("alt", title);
+      figure.setAttribute("class", date);
+      figure.appendChild(videos);
+    }
+    return article;
   }
-  return article;
 }
+
+sortedData.forEach((item) => {
+  const Template = new Factory_Pattern(item);
+  pictureSection.appendChild(Template.mediaFactory());
+});
 
 //Récupère les articles créers
 const articles = document.querySelectorAll("article");
