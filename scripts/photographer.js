@@ -41,7 +41,7 @@ const heart = document.createElement("i");
 function getUserCardDOM() {
   const img = document.createElement("img");
   img.setAttribute("src", picture);
-  img.setAttribute("alt", name);
+  img.setAttribute("alt", "photo représentant " + name);
   img.setAttribute("class", "p" + id);
   const blocimg = document.createElement("div");
   blocimg.setAttribute("class", "blocimg");
