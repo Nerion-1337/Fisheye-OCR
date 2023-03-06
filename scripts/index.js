@@ -1,5 +1,3 @@
-import * as loader from "./loader.js";
-
 async function Dataphotographer() {
   try {
     const response = await fetch("./data/photographers.json");
@@ -10,6 +8,7 @@ async function Dataphotographer() {
   }
 }
 
+async function allPhotographer(){
 let photographers = await Dataphotographer();
 
 const photographersSection = document.querySelector(".photographer_section");
@@ -64,3 +63,5 @@ photographers.forEach((photographer) => {
   const Template = new Factory_Pattern(photographer);
   photographersSection.appendChild(Template.getUserCardDOM(photographer));
 });
+}
+allPhotographer();

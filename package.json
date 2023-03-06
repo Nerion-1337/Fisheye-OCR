@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sass": "sass --watch ./css/_map.scss:./css/style.css"
+    "sass": "sass --watch ./css/_map.scss:./css/style.css",
+    "lint": "eslint ."
   },
   "author": "Nerion",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.35.0"
+  }
 }

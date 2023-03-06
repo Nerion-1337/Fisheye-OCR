@@ -1,5 +1,3 @@
-import * as loader from "./loader.js";
-
 //Récupère id inséré dans l'url
 const url = window.location.href;
 const idUser = new URL(url).searchParams.get("id");
@@ -19,6 +17,8 @@ async function fetchData(idUser) {
   }
 }
 
+
+async function photographerProfil(){
 let fulldata = await fetchData(idUser);
 
 //Récupérer est utiliser les données photographe
@@ -208,7 +208,6 @@ spans.forEach((span) => {
 
 //fenêtre picture
 const aside = document.querySelector("aside");
-const boxPicture = document.querySelector(".boxPicture");
 const boxVideo = document.querySelector(".boxVideo");
 const boxImg = document.querySelector(".boxImg");
 const titre = document.querySelector(".boxTitle");
@@ -469,7 +468,6 @@ function validtext() {
 
 //Accessibilité pour clavier
 const wrapper = document.querySelector(".wrapper");
-const select = document.querySelector(".select");
 
 wrapper.addEventListener("keydown", (e) => {
   if (e.keyCode === 13) {
@@ -499,3 +497,5 @@ spans.forEach((span) => {
     wrapper.setAttribute("aria-expanded", "false");
   });
 });
+}
+photographerProfil();
