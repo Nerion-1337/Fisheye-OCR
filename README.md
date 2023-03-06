@@ -11,9 +11,10 @@ Langage solicité:
 
 # Objectif
 
-- Maitrise site dynamiqu
+- Maitrise site dynamique
 - Communication avec API
 - Site optimiser pour l'accessibilité
+-Vérification code par eslintrc
 
 # Visiter
 
