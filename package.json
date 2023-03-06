@@ -5,11 +5,15 @@
   "main": "index.js",
   "scripts": {
     "sass": "sass --watch ./css/_map.scss:./css/style.css",
-    "lint": "eslint ."
+    "lint": "eslint --max-warnings=0 ."
+  },
+  "gitHooks": {
+    "pre-push": "npm run lint"
   },
   "author": "Nerion",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^8.35.0"
+    "eslint": "^8.35.0",
+    "yorkie": "^2.0.0"
   }
 }

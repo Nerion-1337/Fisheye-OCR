@@ -12,4 +12,5 @@
     "extends": [
       "eslint:recommended"
     ]
+
   }
