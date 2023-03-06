@@ -158,13 +158,6 @@ async function photographerProfil() {
         parent.removeChild(span);
         parent.insertBefore(span, firstSpan);
         firstSpan = span;
-        spans.forEach((span) => {
-          if (span === firstSpan) {
-            span.setAttribute("aria-selected", "true");
-          } else {
-            span.setAttribute("aria-selected", "false");
-          }
-        });
       }
 
       //Va permettre de réorganiser les articles en fonction du filtre selectionné plus haut
@@ -216,6 +209,7 @@ async function photographerProfil() {
 
   //ferme la fênetre
   close.addEventListener("click", () => {
+    aside.style.display = "none"
     aside.style.transform = "scale(0)";
     boxVideo.style.display = "none";
     boxImg.style.display = "none";
@@ -230,7 +224,8 @@ async function photographerProfil() {
         let currentArticle = index;
         const fig = article.querySelector("figure");
         const child = fig.firstElementChild;
-
+        
+        aside.style.display = "block"
         aside.setAttribute("aria-hidden", "false");
         aside.style.transform = "scale(1)";
         titre.innerHTML = article.querySelector(".title").textContent;

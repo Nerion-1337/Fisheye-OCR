@@ -580,6 +580,7 @@ aside {
   z-index: 10;
   transition: 0.5s;
   transform: scale(0);
+  display: none;
 }
 
 .boxWindow {
