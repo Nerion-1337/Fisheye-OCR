@@ -15,9 +15,9 @@
       crossorigin="anonymous"
       referrerpolicy="noreferrer"
     />
-    <script src="../scripts/loader.js" type="module"></script>
+    <script defer src="../scripts/loader.js" type="module"></script>
     <script defer src="../scripts/photographer.js" type="module"></script>
-    <title>Fisheye - photographe</title>
+    <title>Fisheye - Site d'exposition pour photographe</title>
   </head>
   <body>
     <section
@@ -26,17 +26,17 @@
       dir="ltr"
     >
       <p dir="ltr">Chargement</p>
-      <div class="bloc_load" dir="ltr">
-        <div class="load"></div>
-        <div class="load"></div>
-        <div class="load"></div>
-      </div>
+      <ol class="bloc_load" dir="ltr">
+        <li class="load"></li>
+        <li class="load"></li>
+        <li class="load"></li>
+      </ol>
     </section>
     <header>
       <a
         role="link"
         href="../index.html"
-        aria-label="retourner à la page d'accueil des photographe"
+        aria-label="Retourner à la page d'accueil des photographes"
         ><img
           src="../assets/images/logo.png"
           class="logo"
@@ -125,7 +125,7 @@
           <div class="bloc_header">
             <h2>Contactez-moi</h2>
             <a class="close_button" href="#" role="button" aria-label="fermer"
-              ><img src="../assets/icons/close.svg"
+              ><img src="../assets/icons/close.svg" alt=""
             /></a>
           </div>
           <h2 class="name_header"></h2>
@@ -145,7 +145,7 @@
               aria-label="Entrez votre prénom"
               >Prénom</label
             >
-            <input class="text-control" type="text" id="first" name="first" />
+            <input class="text-control" type="text" id="first" name="first" tabindex="1" required/>
             <small></small>
           </div>
 
@@ -153,7 +153,7 @@
             <label class="text-label" for="last" aria-label="Entrez votre nom"
               >Nom</label
             >
-            <input class="text-control" type="text" id="last" name="last" />
+            <input class="text-control" type="text" id="last" name="last" tabindex="2" required/>
             <small></small>
           </div>
 
@@ -164,7 +164,7 @@
               aria-label="Entrez votre email"
               >E-mail</label
             >
-            <input class="text-control" type="text" id="email" name="email" />
+            <input class="text-control" type="text" id="email" name="email" tabindex="3" required/>
             <small></small>
           </div>
 
@@ -175,7 +175,7 @@
               aria-label="Entrez votre message"
               >Votre message</label
             >
-            <input type="text" class="text-control" id="text" name="text" />
+            <input type="text" class="text-control" id="text" name="text" tabindex="4" required/>
             <small></small>
           </div>
 
