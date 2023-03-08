@@ -199,6 +199,8 @@ async function photographerProfil() {
   });
 
   //fenêtre picture
+  const header = document.querySelector("header");
+  const filter = document.querySelector(".filter");
   const aside = document.querySelector("aside");
   const boxVideo = document.querySelector(".boxVideo");
   const boxImg = document.querySelector(".boxImg");
@@ -210,6 +212,10 @@ async function photographerProfil() {
   //ferme la fênetre
   close.addEventListener("click", () => {
     aside.style.display = "none"
+    header.style.display = "flex"
+    photograph_header.style.display = "flex"
+    filter.style.display = "flex"
+    pictureSection.style.display = "flex"
     aside.style.transform = "scale(0)";
     boxVideo.style.display = "none";
     boxImg.style.display = "none";
@@ -225,7 +231,12 @@ async function photographerProfil() {
         const fig = article.querySelector("figure");
         const child = fig.firstElementChild;
         
-        aside.style.display = "block"
+        aside.style.display = "flex"
+        header.style.display = "none"
+        photograph_header.style.display = "none"
+        filter.style.display = "none"
+        pictureSection.style.display = "none"
+
         aside.setAttribute("aria-hidden", "false");
         aside.style.transform = "scale(1)";
         titre.innerHTML = article.querySelector(".title").textContent;

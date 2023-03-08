@@ -23,7 +23,7 @@ async function allPhotographer() {
       const { id, name, portrait, city, country, tagline, price } =
         this.photographer;
       const picture = `assets/photographers/${portrait}`;
-      const linktopage = "./Page/photographer.html?id=" + id;
+      const linktopage = `./Page/photographer.html?id=${id}`;
 
       const article = document.createElement("article");
       const img = document.createElement("img");
