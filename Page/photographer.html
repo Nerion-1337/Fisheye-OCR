@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <link href="../css/style.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="../assets/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+      integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+      crossorigin="anonymous"
+      referrerpolicy="noreferrer"
+    />
+    <script defer src="../scripts/loader.js" type="module"></script>
+    <script defer src="../scripts/photographer.js" type="module"></script>
+    <title>Fisheye - Site d'exposition pour photographe</title>
+  </head>
+  <body>
+    <section
+      class="loader"
+      aria-label="Contenu en cours de chargement"
+      dir="ltr"
+    >
+      <p dir="ltr">Chargement</p>
+      <ol class="bloc_load" dir="ltr">
+        <li class="load"></li>
+        <li class="load"></li>
+        <li class="load"></li>
+      </ol>
+    </section>
+    <header>
+      <a
+        role="link"
+        href="../index.html"
+        aria-label="Retourner à la page d'accueil des photographes"
+        ><img
+          src="../assets/images/logo.png"
+          class="logo"
+          alt="Logo de l'entreprise Fisheye, spécialisée dans la photographie et la vidéographie"
+      /></a>
+    </header>
+    <main id="main">
+      <div class="photograph-header">
+        <div class="profil">
+          <div class="otherInfo">
+            <div class="totalLike">300</div>
+            <div class="price"></div>
+          </div>
+        </div>
+        <button class="contact_button" aria-pressed="false">
+          Contactez-moi
+        </button>
+      </div>
+      <section>
+        <div class="filter">
+          <p>Trier par</p>
+          <button class="wrapper" aria-haspopup="listbox" aria-expanded="false">
+            <div class="select">
+              <div class="arrow"></div>
+              <a
+                role="button"
+                class="selectFilter"
+                href="#"
+                aria-label="Trier les photos et videos par popularité"
+                >Popularite</a
+              >
+              <a
+                role="button"
+                class="selectFilter"
+                href="#"
+                aria-label="Trier les photos et videos par date d'ajout"
+                >Date</a
+              >
+              <a
+                role="button"
+                class="selectFilter"
+                href="#"
+                aria-label="Trier les photos et videos par titre"
+                >Titre</a
+              >
+            </div>
+          </button>
+        </div>
+      </section>
+      <section class="picture_section"></section>
+
+      <aside role="slider" aria-label="lightbox modal" aria-hidden="true">
+        <div class="boxWindow">
+          <button
+            class="left"
+            role="button"
+            aria-label="bascule au media précédent"
+          ></button>
+          <div class="boxPictureTitle">
+            <div class="boxPicture">
+              <img class="boxImg" src="" alt="" />
+              <video class="boxVideo" src="" alt=""></video>
+            </div>
+            <h2 class="boxTitle"></h2>
+          </div>
+          <button class="close" role="button" aria-label="fermer">
+            &times;
+          </button>
+          <button
+            class="right"
+            role="button"
+            aria-label="bascule au media suivant"
+          ></button>
+        </div>
+      </aside>
+    </main>
+
+    <div
+      id="contact_modal"
+      aria-label="contact-modal"
+      role="dialog"
+      aria-hidden="true"
+    >
+      <div class="modal">
+        <header>
+          <div class="bloc_header">
+            <h2>Contactez-moi</h2>
+            <a class="close_button" href="#" role="button" aria-label="fermer"
+              ><img src="../assets/icons/close.svg" alt=""
+            /></a>
+          </div>
+          <h2 class="name_header"></h2>
+        </header>
+
+        <form
+          id="form"
+          name="reserve"
+          action="index.html"
+          method="get"
+          role="document"
+        >
+          <div class="formData first">
+            <label
+              class="text-label"
+              for="first"
+              aria-label="Entrez votre prénom"
+              >Prénom</label
+            >
+            <input class="text-control" type="text" id="first" name="first" tabindex="1" required/>
+            <small></small>
+          </div>
+
+          <div class="formData last">
+            <label class="text-label" for="last" aria-label="Entrez votre nom"
+              >Nom</label
+            >
+            <input class="text-control" type="text" id="last" name="last" tabindex="2" required/>
+            <small></small>
+          </div>
+
+          <div class="formData email">
+            <label
+              class="text-label"
+              for="email"
+              aria-label="Entrez votre email"
+              >E-mail</label
+            >
+            <input class="text-control" type="text" id="email" name="email" tabindex="3" required/>
+            <small></small>
+          </div>
+
+          <div class="formData text">
+            <label
+              class="text-label"
+              for="text"
+              aria-label="Entrez votre message"
+              >Votre message</label
+            >
+            <input type="text" class="text-control" id="text" name="text" tabindex="4" required/>
+            <small></small>
+          </div>
+
+          <button class="valid_button">Envoyer</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

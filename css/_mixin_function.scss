@@ -1,0 +1,48 @@
+// @include absolute;
+@mixin absolute($top, $right, $bottom, $left, $x, $y) {
+    position: absolute;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+    transform: ($x, $y);
+}
+
+@mixin center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin fullwindow {
+    height: 100vh;
+    width: 100vw;
+}
+
+@mixin visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+@mixin invisible {
+    opacity: 0;
+    visibility: hidden;
+}
+
+@mixin phone {
+    @media screen and (max-width: $phone) {
+        @content;
+    }
+}
+
+@mixin tablette {
+    @media screen and (man-width: $tablette) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (max-width: $desktop) {
+        @content;
+    }
+}
