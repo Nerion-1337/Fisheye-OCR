@@ -1,0 +1,11 @@
+{
+  "name": "0---start-classique",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./css/_map.scss:./css/style.css"
+  },
+  "author": "Nerion",
+  "license": "ISC"
+}
