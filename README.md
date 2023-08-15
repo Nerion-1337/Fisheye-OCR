@@ -19,8 +19,8 @@ Pour installer la base de donner rendez vous dans le dossier back puis cherchez 
 - database.js
 
 Modifier les paramètres de la variable "connection" pour l'adapter à votre serveur. Puis taper dans le terminal:
-```cd back```
-```node database.js```
+- ```cd back```
+- ```node database.js```
 
 Il ne vous reste plus qu'a lancer le serveur:
 ```yarn start```
