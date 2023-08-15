@@ -5,8 +5,8 @@ const mysql = require('mysql2');
 const connection = mysql.createConnection({
     host:"localhost",
     user:"root",
-    password:"Gotham21087*",
-    database:"test"
+    password:"A MODIFIER",
+    database:"A MODIFIER"
 });
 
 // Charger les données depuis le fichier JSON
