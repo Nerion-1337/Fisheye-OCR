@@ -28,7 +28,7 @@ const storage = multer.diskStorage({
       if (extension == undefined) {
         callback(new Error('Invalid MIME TYPES'));     
     } else {
-        callback(null, name[0] + "_" + Date.now() + "." + extension);
+        callback(null, name[0] + "." + extension);
     }
     }
   });

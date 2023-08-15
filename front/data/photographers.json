@@ -2,57 +2,69 @@
 	"photographers": [
 		{
 			"name": "Mimi Keel",
+			"password": "$2b$10$NfLAhG7bhbhFyxMqQIp3qudmje0HVFADY9ZVzzXSaC3y2sYfZgFFK",
 			"id": 7,
 			"city": "London",
 			"country": "UK",
 			"tagline": "Voir le beau dans le quotidien",
 			"price": 400,
-			"portrait": "MimiKeel.jpg"
+			"portrait": "MimiKeel.jpg",
+			"portrait_servert": "http://localhost:3000/assets/avatar/MimiKeel_1690858053242.jpg"
 		},
 		{
 			"name": "Ellie-Rose Wilkens",
+			"password": "$2b$10$NfLAhG7bhbhFyxMqQIp3qudmje0HVFADY9ZVzzXSaC3y2sYfZgFFK",
 			"id": 12,
 			"city": "Paris",
 			"country": "France",
 			"tagline": "Capturer des compositions complexes",
 			"price": 250,
-			"portrait": "EllieRoseWilkens.jpg"
+			"portrait": "EllieRoseWilkens.jpg",
+			"portrait_servert": "http://localhost:3000/assets/avatar/EllieRoseWilkens_1690858185888.jpg"
 		},
 		{
 			"name": "Tracy Galindo",
+			"password": "$2b$10$NfLAhG7bhbhFyxMqQIp3qudmje0HVFADY9ZVzzXSaC3y2sYfZgFFK",
 			"id": 13,
 			"city": "Montreal",
 			"country": "Canada",
 			"tagline": "Photographe freelance",
 			"price": 500,
-			"portrait": "TracyGalindo.jpg"
+			"portrait": "TracyGalindo.jpg",
+			"portrait_servert": "http://localhost:3000/assets/avatar/TracyGalindo_1690858226776.jpg"
 		},
 		{
 			"name": "Nabeel Bradford",
+			"password": "$2b$10$NfLAhG7bhbhFyxMqQIp3qudmje0HVFADY9ZVzzXSaC3y2sYfZgFFK",
 			"id": 14,
 			"city": "Mexico City",
 			"country": "Mexico",
 			"tagline": "Toujours aller de l'avant",
 			"price": 350,
-			"portrait": "NabeelBradford.jpg"
+			"portrait": "NabeelBradford.jpg",
+			"portrait_servert": "http://localhost:3000/assets/avatar/NabeelBradford_1690858251969.jpg"
 		},
 		{
 			"name": "Rhode Dubois",
+			"password": "$2b$10$NfLAhG7bhbhFyxMqQIp3qudmje0HVFADY9ZVzzXSaC3y2sYfZgFFK",
 			"id": 15,
 			"city": "Barcelona",
 			"country": "Spain",
 			"tagline": "Je crée des souvenirs",
 			"price": 275,
-			"portrait": "RhodeDubois.jpg"
+			"portrait": "RhodeDubois.jpg",
+			"portrait_servert": "http://localhost:3000/assets/avatar/RhodeDubois_1690858278142.jpg"
 		},
 		{
 			"name": "Marcel Nikolic",
+			"password": "$2b$10$NfLAhG7bhbhFyxMqQIp3qudmje0HVFADY9ZVzzXSaC3y2sYfZgFFK",
 			"id": 16,
 			"city": "Berlin",
 			"country": "Germany",
 			"tagline": "Toujours à la recherche de LA photo",
 			"price": 300,
-			"portrait": "MarcelNikolic.jpg"
+			"portrait": "MarcelNikolic.jpg",
+			"portrait_servert": "http://localhost:3000/assets/avatar/MarcelNikolic_1690942565023.jpg"
 		}
 	],
 	"media": [
@@ -153,7 +165,7 @@
 			"title": "8 Rows",
 			"image": "Sport_2000_with_8.jpg",
 			"likes": 52,
-			"date": "2013-02-30",
+			"date": "2013-02-18",
 			"price": 70
 		},
 		{
@@ -438,7 +450,7 @@
 			"price": 60
 		},
 		{
-			"id": 235234343,
+			"id": 235234393,
 			"photographerId": 16,
 			"title": "Adventure Door, India",
 			"image": "Travel_Adventure_Door.jpg",
@@ -497,7 +509,7 @@
 			"title": "Tricks in te air",
 			"video": "Sport_Tricks_in_the_air.mp4",
 			"likes": 150,
-			"date": "2018-02-30",
+			"date": "2018-02-24",
 			"price": 70
 		  },
 		{

@@ -5,10 +5,10 @@ const { SQL } = require("../SQL");
 //
 exports.like = async (req, res, next) => {
   const controle = "SELECT * FROM `image` WHERE id = ? AND id_user = ?";
-  const select = "SELECT * FROM `like` WHERE image_id = ? AND user_like_id = ?";
+  const select = "SELECT * FROM `likes` WHERE image_id = ? AND user_like_id = ?";
   const insert =
-    "INSERT INTO `like` (`image_id`,`user_like_id`,`user_image_id`) VALUE (?)";
-  const delet = "DELETE FROM `like` WHERE id = ?";
+    "INSERT INTO `likes` (`image_id`,`user_like_id`,`user_image_id`) VALUE (?)";
+  const delet = "DELETE FROM `likes` WHERE id = ?";
   //
   const user = req.auth.userId;
   const img = req.body.image_id;
@@ -41,7 +41,7 @@ exports.like = async (req, res, next) => {
 };
 
 exports.compte_like = async (req, res, next) => {
-  const select = "SELECT COUNT(*) FROM `like` WHERE image_id = ?";
+  const select = "SELECT COUNT(*) FROM `likes` WHERE image_id = ?";
   const update = "UPDATE image SET `likes` = ? WHERE id = ?";
   //
   const img = req.body.image_id;
