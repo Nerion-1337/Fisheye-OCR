@@ -18,7 +18,7 @@ Langage solicité:
 
 # Maquette
 
-[Canevas](https://www.figma.com/file/bAnXDNqRKCRRP8mY2gcb5p/UI-Design?node-id=4%3A1](https://www.figma.com/file/Q3yNeD7WTK9QHDldg9vaRl/UI-Design-FishEye-FR?type=design&node-id=0-1&mode=design&t=Ylrj7HgFZ5TDS0hp-0)
+[Canevas](https://www.figma.com/file/Q3yNeD7WTK9QHDldg9vaRl/UI-Design-FishEye-FR?node-id=0%3A1)
 
 # Visiter
 
